@@ -1,59 +1,184 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# LearnHub – Student Learning and Academic Portal
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A web-based Student Learning and Academic Portal developed using Laravel. LearnHub provides students with a centralized platform to manage their academic profiles, explore courses, enroll in available courses, and participate in academic discussions.
 
-## About Laravel
+## Project Overview
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+The Student Learning and Academic Portal aims to organize student-related information and provide a simple, accessible environment for academic interaction.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The system integrates different database relationships, authentication, session management, and security features into one application.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Features
 
-## Learning Laravel
+### 1. User Authentication
+- Student registration and login.
+- Secure password hashing.
+- Logout functionality.
+- Login lockout after 5 consecutive failed attempts.
+- Temporary 60-second lockout with a warning message.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 2. Dashboard
+- Personalized student welcome message.
+- Overview of enrolled courses.
+- Available course statistics.
+- Discussion and student statistics.
+- Recent discussions and quick navigation.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 3. Course Management
+- View available courses.
+- Enroll in courses.
+- Unenroll from courses.
+- View currently enrolled courses.
 
-## Laravel Sponsors
+### 4. Academic Discussions
+- Create discussion posts.
+- View discussions from other students.
+- Open individual discussion pages.
+- Add comments to discussions.
+- Delete your own posts and comments.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 5. Student Profile
+- View and update student information.
+- Update contact details.
+- Manage phone information.
 
-### Premium Partners
+### 6. Security and Data Integrity
+- Authentication middleware protects student pages.
+- Guest middleware prevents authenticated users from accessing login and registration pages.
+- Login rate limiting after five failed attempts.
+- Submit buttons are disabled after submission to reduce accidental duplicate submissions.
+- POST requests use redirects following the Post/Redirect/Get pattern.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## Database Relationships
 
-## Contributing
+The project demonstrates three major types of database relationships:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+| Relationship | Models / Tables | Description |
+|---|---|---|
+| One-to-One | User, UserPhone, Phone | A user has one associated phone contact record. |
+| One-to-Many | User, Post, Comment | A user can create multiple posts, and each post can have multiple comments. |
+| Many-to-Many | Student, Course | A student can enroll in multiple courses, and a course can have multiple students. |
 
-## Code of Conduct
+The many-to-many relationship uses the `course_student` pivot table.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Technologies Used
 
-## Security Vulnerabilities
+- PHP
+- Laravel 12
+- MySQL
+- HTML
+- CSS
+- JavaScript
+- Blade Templates
+- Tailwind CSS
+- Vite
+- Git and GitHub
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Installation and Setup
 
-## License
+Follow these instructions to run the project on your local computer.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Prerequisites
+- PHP
+- Composer
+- Node.js and npm
+- MySQL
+- Git
+
+### Step 1: Clone the Repository
+
+```bash
+git clone https://github.com/alanlabajo696-hub/student-learning-portal.git
+cd student-learning-portal
+```
+
+### Step 2: Install Dependencies
+
+```bash
+composer install
+npm install
+```
+
+### Step 3: Configure Environment
+
+Create your environment file:
+
+```bash
+cp .env.example .env
+```
+
+Generate the application key:
+
+```bash
+php artisan key:generate
+```
+
+### Step 4: Configure MySQL
+
+Create a MySQL database named:
+
+```text
+student_learning_portal
+```
+
+Update the database settings in your `.env` file:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=student_learning_portal
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Change the username and password if your MySQL configuration requires different credentials.
+
+### Step 5: Run Migrations and Seeders
+
+```bash
+php artisan migrate --seed
+```
+
+This creates the required database tables and inserts the initial course and student records.
+
+### Step 6: Build Frontend Assets
+
+```bash
+npm run build
+```
+
+### Step 7: Start the Application
+
+```bash
+php artisan serve
+```
+
+Open the application in your browser:
+
+```text
+http://127.0.0.1:8000
+```
+
+## Sample Seeded Account
+
+The database seeder creates sample student accounts for testing.
+
+| Email | Password |
+|---|---|
+| student1@example.com | Student123! |
+| student2@example.com | Student123! |
+
+**Security note:** These are demonstration credentials only. Change or remove seeded passwords before deploying the application publicly.
+
+## Project Repository
+
+GitHub: https://github.com/alanlabajo696-hub/student-learning-portal
+
+## Developer
+
+Developed as an academic project demonstrating Laravel development, database relationships, authentication, session management, and student-oriented web application functionality.
+
+---
+
+*LearnHub – Connecting Students, Courses, and Academic Discussions.*
